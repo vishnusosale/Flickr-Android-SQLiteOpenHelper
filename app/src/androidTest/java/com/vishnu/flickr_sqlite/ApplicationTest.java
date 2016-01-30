@@ -1,4 +1,4 @@
-package com.vishnu.flickr_android_sqliteopenhelper;
+package com.vishnu.flickr_sqlite;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

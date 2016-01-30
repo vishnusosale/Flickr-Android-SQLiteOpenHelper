@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/md_white_1000"
     android:orientation="vertical"
-    tools:context="com.vishnu.flickr_android_sqliteopenhelper.MainActivity">
+    tools:context="com.vishnu.flickr_sqlite.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tool_bar"

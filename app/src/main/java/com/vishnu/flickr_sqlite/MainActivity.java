@@ -1,4 +1,4 @@
-package com.vishnu.flickr_android_sqliteopenhelper;
+package com.vishnu.flickr_sqlite;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
