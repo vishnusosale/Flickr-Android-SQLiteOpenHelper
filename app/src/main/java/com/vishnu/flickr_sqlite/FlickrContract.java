@@ -54,6 +54,21 @@ public class FlickrContract {
         public static final String COL_AUTHOR = "author";
         public static final String COL_AUTHOR_ID = "author_id";
 
+
+        public static final String[] PICTURE_COLUMNS = {PictureEntry._ID,
+                PictureEntry.COL_TITLE, PictureEntry.COL_LINK, PictureEntry.COL_IMAGE,
+                PictureEntry.COL_AUTHOR, PictureEntry.COL_AUTHOR_ID};
+
+        /*
+            These are indices tied to PICTURE_COLUMNS. If PICTURE_COLUMNS change, these must change!
+         */
+        public static final int COL_PICTURE_ID = 0;
+        public static final int COL_PICTURE_TITLE = 1;
+        public static final int COL_PICTURE_LINK = 2;
+        public static final int COL_PICTURE_IMAGE = 3;
+        public static final int COL_PICTURE_AUTHOR = 4;
+        public static final int COL_PICTURE_AUTHOR_ID = 5;
+
         public static Uri buildPictureUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }

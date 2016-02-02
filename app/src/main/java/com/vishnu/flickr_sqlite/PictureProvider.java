@@ -16,7 +16,16 @@ public class PictureProvider extends ContentProvider {
 
     static final int PICTURE = 100;
     FlickrDbHelper flickrDbHelper;
-    UriMatcher uriMatcher;
+    UriMatcher uriMatcher = buildUriMatcher();
+
+    static UriMatcher buildUriMatcher() {
+        final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
+        final String authority = FlickrContract.CONTENT_AUTHORITY;
+        matcher.addURI(authority, FlickrContract.PATH_PICTURE, PICTURE);
+
+        return matcher;
+
+    }
 
     @Override
     public boolean onCreate() {
@@ -26,12 +35,14 @@ public class PictureProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
 
         Cursor cursor;
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
-        switch (uriMatcher.match(uri)) {
+        final int match = uriMatcher.match(uri);
+        switch (match) {
             case PICTURE:
                 cursor = flickrDbHelper
                         .getReadableDatabase()
@@ -89,6 +100,7 @@ public class PictureProvider extends ContentProvider {
         Uri returnUri;
 
         switch (match) {
+
             case PICTURE:
                 // insert returns the row id of the inserted row, -1 if there's an error
                 long _id = db.insert(FlickrContract.PictureEntry.TABLE_NAME, null, values);

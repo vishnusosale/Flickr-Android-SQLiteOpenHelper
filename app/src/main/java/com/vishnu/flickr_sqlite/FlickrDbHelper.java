@@ -21,11 +21,12 @@ public class FlickrDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String CREATE_PICTURE_TABLE = "CREATE TABLE " + FlickrContract.PictureEntry.TABLE_NAME
                 + " (" +
-                FlickrContract.PictureEntry.COL_TITLE + " TEXT NOT NULL, " +
-                FlickrContract.PictureEntry.COL_AUTHOR + " TEXT NOT NULL, " +
-                FlickrContract.PictureEntry.COL_AUTHOR_ID + " TEXT NOT NULL, " +
-                FlickrContract.PictureEntry.COL_IMAGE + " TEXT NOT NULL, " +
-                FlickrContract.PictureEntry.COL_LINK + " TEXT NOT NULL);";
+                FlickrContract.PictureEntry._ID + " INTEGER PRIMARY KEY , " +
+                FlickrContract.PictureEntry.COL_TITLE + " TEXT , " +
+                FlickrContract.PictureEntry.COL_AUTHOR + " TEXT , " +
+                FlickrContract.PictureEntry.COL_AUTHOR_ID + " TEXT , " +
+                FlickrContract.PictureEntry.COL_IMAGE + " TEXT , " +
+                FlickrContract.PictureEntry.COL_LINK + " TEXT );";
 
         db.execSQL(CREATE_PICTURE_TABLE);
 
