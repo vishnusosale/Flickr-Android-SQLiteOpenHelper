@@ -79,7 +79,6 @@ public class PictureCursorAdapter extends CursorAdapter {
                         .build();
 
                 viewHolder.imageView.setController(controller);
-
                 viewHolder.titleTextView.setText(cursor.getString(FlickrContract.PictureEntry.COL_PICTURE_TITLE));
         }
     }

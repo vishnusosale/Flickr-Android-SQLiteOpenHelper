@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class FlickrDbHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "flickr_android.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public FlickrDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,7 +26,8 @@ public class FlickrDbHelper extends SQLiteOpenHelper {
                 FlickrContract.PictureEntry.COL_AUTHOR + " TEXT , " +
                 FlickrContract.PictureEntry.COL_AUTHOR_ID + " TEXT , " +
                 FlickrContract.PictureEntry.COL_IMAGE + " TEXT , " +
-                FlickrContract.PictureEntry.COL_LINK + " TEXT );";
+                FlickrContract.PictureEntry.COL_LINK + " TEXT , " +
+                FlickrContract.PictureEntry.COL_PUBLISHED_DATE + " TEXT);";
 
         db.execSQL(CREATE_PICTURE_TABLE);
 

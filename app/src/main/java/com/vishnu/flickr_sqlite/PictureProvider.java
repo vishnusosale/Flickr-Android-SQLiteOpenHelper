@@ -93,7 +93,7 @@ public class PictureProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(Uri uri, ContentValues values){
 
         final SQLiteDatabase db = flickrDbHelper.getWritableDatabase();
         final int match = uriMatcher.match(uri);

@@ -53,11 +53,12 @@ public class FlickrContract {
         public static final String COL_IMAGE = "image";
         public static final String COL_AUTHOR = "author";
         public static final String COL_AUTHOR_ID = "author_id";
+        public static final String COL_PUBLISHED_DATE = "published_date";
 
 
         public static final String[] PICTURE_COLUMNS = {PictureEntry._ID,
                 PictureEntry.COL_TITLE, PictureEntry.COL_LINK, PictureEntry.COL_IMAGE,
-                PictureEntry.COL_AUTHOR, PictureEntry.COL_AUTHOR_ID};
+                PictureEntry.COL_AUTHOR, PictureEntry.COL_AUTHOR_ID, PictureEntry.COL_PUBLISHED_DATE};
 
         /*
             These are indices tied to PICTURE_COLUMNS. If PICTURE_COLUMNS change, these must change!
@@ -68,6 +69,7 @@ public class FlickrContract {
         public static final int COL_PICTURE_IMAGE = 3;
         public static final int COL_PICTURE_AUTHOR = 4;
         public static final int COL_PICTURE_AUTHOR_ID = 5;
+        public static final int COL_PICTURE_PUBLISHED_DATE = 6;
 
         public static Uri buildPictureUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

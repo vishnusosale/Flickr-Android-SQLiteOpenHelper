@@ -1,6 +1,7 @@
 package com.vishnu.flickr_sqlite;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -24,7 +27,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private final static int PICTURE_LOADER_ID = 100;
+    private final static int PICTURE_LOADER_ID = 0;
     private final String TAG = getClass().getSimpleName();
     Toolbar toolbar;
     ListView listView;
@@ -46,6 +49,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         pictureCursorAdapter = new PictureCursorAdapter(getApplicationContext(), null, 0);
         listView.setAdapter(pictureCursorAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+
+                if (cursor != null) {
+
+                }
+
+                Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void run() {
@@ -62,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     for (int i = 0; i < response.getJSONArray("items").length(); i++) {
                         ContentValues contentValues = new ContentValues();
 
-//                        contentValues.put(FlickrContract.PictureEntry.COL_ID, String.valueOf(i));
                         contentValues.put(FlickrContract.PictureEntry.COL_TITLE,
                                 response.getJSONArray("items").getJSONObject(i).getString("title"));
                         contentValues.put(FlickrContract.PictureEntry.COL_AUTHOR,
@@ -74,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         contentValues.put(FlickrContract.PictureEntry.COL_IMAGE,
                                 response.getJSONArray("items").getJSONObject(i).getJSONObject("media")
                                         .getString("m"));
+                        contentValues.put(FlickrContract.PictureEntry.COL_PUBLISHED_DATE,
+                                response.getJSONArray("items").getJSONObject(i).getString("published"));
 
                         getApplicationContext().getContentResolver().insert(
                                 FlickrContract.PictureEntry.CONTENT_URI,
@@ -112,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 FlickrContract.PictureEntry.PICTURE_COLUMNS,
                 null,
                 null,
-                null);
+                FlickrContract.PictureEntry._ID + " DESC");
     }
 
     @Override
