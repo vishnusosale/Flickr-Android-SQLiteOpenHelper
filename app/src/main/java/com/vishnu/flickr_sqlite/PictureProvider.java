@@ -42,22 +42,33 @@ public class PictureProvider extends ContentProvider {
         // Here's the switch statement that, given a URI, will determine what kind of request it is,
         // and query the database accordingly.
         final int match = uriMatcher.match(uri);
-        switch (match) {
-            case PICTURE:
-                cursor = flickrDbHelper
-                        .getReadableDatabase()
-                        .query(FlickrContract.PictureEntry.TABLE_NAME,
-                                projection,
-                                selection,
-                                selectionArgs,
-                                null,
-                                null,
-                                sortOrder);
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
 
+
+        if (match == PICTURE) {
+            cursor = flickrDbHelper
+                    .getReadableDatabase()
+                    .query(FlickrContract.PictureEntry.TABLE_NAME,
+                            projection,
+                            selection,
+                            selectionArgs,
+                            null,
+                            null,
+                            sortOrder);
+        } else if (uri.toString().contains(FlickrContract.PATH_PICTURE)) {
+            cursor = flickrDbHelper
+                    .getReadableDatabase()
+                    .query(FlickrContract.PictureEntry.TABLE_NAME,
+                            projection,
+                            selection,
+                            selectionArgs,
+                            null,
+                            null,
+                            sortOrder);
+        } else {
+            throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
+
+
         /**
          * set notificationUri for the cursor to the one that was passed into the function
          * The cursor registers the content observer to watch for changes to that uri and any of its
@@ -93,7 +104,7 @@ public class PictureProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values){
+    public Uri insert(Uri uri, ContentValues values) {
 
         final SQLiteDatabase db = flickrDbHelper.getWritableDatabase();
         final int match = uriMatcher.match(uri);

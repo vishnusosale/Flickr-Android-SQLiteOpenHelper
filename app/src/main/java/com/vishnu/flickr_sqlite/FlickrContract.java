@@ -74,7 +74,6 @@ public class FlickrContract {
         public static Uri buildPictureUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
-
     }
 
 

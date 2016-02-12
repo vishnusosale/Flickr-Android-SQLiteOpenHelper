@@ -56,11 +56,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 
                 if (cursor != null) {
-
+                    Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class)
+                            .setData(FlickrContract.PictureEntry.buildPictureUri(id));
+                    Log.e("data MIAN", intent.getData().toString());
+                    startActivity(intent);
                 }
 
-                Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class);
-                startActivity(intent);
             }
         });
 
