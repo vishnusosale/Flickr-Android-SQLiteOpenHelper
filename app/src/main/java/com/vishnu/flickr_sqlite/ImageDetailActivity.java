@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -20,6 +21,7 @@ public class ImageDetailActivity extends AppCompatActivity
     private static final int DETAIL_LOADER = 0;
 
     SimpleDraweeView picture_image_view;
+    TextView picture_title;
     Uri uri;
 
     @Override
@@ -28,6 +30,7 @@ public class ImageDetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_image_detail);
 
         picture_image_view = (SimpleDraweeView) findViewById(R.id.picture_image_view);
+        picture_title = (TextView) findViewById(R.id.picture_title);
 
         if (savedInstanceState == null) {
             uri = getIntent().getData();
@@ -78,8 +81,9 @@ public class ImageDetailActivity extends AppCompatActivity
                 .setImageRequest(request)
                 .setOldController(picture_image_view.getController())
                 .build();
-
         picture_image_view.setController(controller);
+
+        picture_title.setText(cursor.getString(FlickrContract.PictureEntry.COL_PICTURE_TITLE));
     }
 
     @Override
