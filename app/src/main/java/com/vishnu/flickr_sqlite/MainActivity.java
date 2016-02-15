@@ -1,19 +1,12 @@
 package com.vishnu.flickr_sqlite;
 
 import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,44 +18,26 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity {
 
-    private final static int PICTURE_LOADER_ID = 0;
     private final String TAG = getClass().getSimpleName();
     Toolbar toolbar;
-    ListView listView;
-    PictureCursorAdapter pictureCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportLoaderManager().initLoader(PICTURE_LOADER_ID, null, this);
-
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        listView = (ListView) findViewById(R.id.list_view);
 
         setSupportActionBar(toolbar);
         run();
 
-        pictureCursorAdapter = new PictureCursorAdapter(getApplicationContext(), null, 0);
-        listView.setAdapter(pictureCursorAdapter);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Cursor cursor = (Cursor) parent.getItemAtPosition(position);
-
-                if (cursor != null) {
-                    Intent intent = new Intent(MainActivity.this, ImageDetailActivity.class)
-                            .setData(FlickrContract.PictureEntry.buildPictureUri(id));
-                    startActivity(intent);
-                }
-
-            }
-        });
+        fragmentTransaction.add(R.id.main_list_view_frame_layout, new PictureListFragment());
+        fragmentTransaction.commit();
 
     }
 
@@ -123,24 +98,4 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri pictureUri = FlickrContract.PictureEntry.CONTENT_URI;
-        return new CursorLoader(getApplicationContext(),
-                pictureUri,
-                FlickrContract.PictureEntry.PICTURE_COLUMNS,
-                null,
-                null,
-                FlickrContract.PictureEntry._ID + " DESC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        pictureCursorAdapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        pictureCursorAdapter.swapCursor(null);
-    }
 }

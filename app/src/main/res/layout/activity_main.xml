@@ -13,8 +13,8 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"/>
 
-    <ListView
-        android:id="@+id/list_view"
+    <FrameLayout
+        android:id="@+id/main_list_view_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
