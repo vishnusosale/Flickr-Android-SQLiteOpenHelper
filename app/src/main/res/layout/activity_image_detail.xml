@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context="com.vishnu.flickr_sqlite.ImageDetailActivity">
 
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/picture_image_view"
+    <FrameLayout
+        android:id="@+id/picture_detail_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        fresco:actualImageScaleType="fitXY"/>
+        android:layout_height="match_parent"/>
 
-    <TextView
-        android:id="@+id/picture_title"
-        style="@style/FlickrTextViewStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/picture_image_view"
-        android:padding="5dp"
-        />
 </RelativeLayout>
