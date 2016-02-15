@@ -43,7 +43,7 @@ public class PictureListFragment extends Fragment implements
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
 
                 if (cursor != null) {
-                    Intent intent = new Intent(getActivity(), ImageDetailActivity.class)
+                    Intent intent = new Intent(getActivity(), PictureDetailActivity.class)
                             .setData(FlickrContract.PictureEntry.buildPictureUri(id));
                     startActivity(intent);
                 }

@@ -24,7 +24,7 @@
             android:authorities="com.vishnu.flickr_sqlite"
             android:exported="false"/>
 
-        <activity android:name=".ImageDetailActivity">
+        <activity android:name=".PictureDetailActivity">
         </activity>
     </application>
 

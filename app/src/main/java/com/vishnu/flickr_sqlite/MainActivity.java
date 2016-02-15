@@ -2,8 +2,6 @@ package com.vishnu.flickr_sqlite;
 
 import android.content.ContentValues;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,22 +20,33 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
     Toolbar toolbar;
+    boolean mTwoPane;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (findViewById(R.id.picture_detail_frame_layout) != null)
+        {
+            mTwoPane = true;
+            if (savedInstanceState == null)
+            {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.picture_detail_frame_layout, new PictureDetailFragment())
+                        .commit();
+            }
+        }
+        else
+        {
+            mTwoPane = false;
+        }
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         setSupportActionBar(toolbar);
         run();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.main_list_view_frame_layout, new PictureListFragment());
-        fragmentTransaction.commit();
 
     }
 
