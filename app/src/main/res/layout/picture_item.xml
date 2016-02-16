@@ -19,7 +19,6 @@
         android:layout_gravity="center_vertical"
         android:maxLines="3"
         android:padding="5dp"
-        android:textColor="@color/md_grey_900"
         android:textSize="15sp"
         />
 
