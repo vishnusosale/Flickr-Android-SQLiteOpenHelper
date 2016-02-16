@@ -7,12 +7,29 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/md_white_1000</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
+
 
     <style name="FlickrTextViewStyle" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorPrimaryTextColor</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="FlickToolBarTheme" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="actionBarPopOverLay">
+        <item name="android:textColorPrimary">@color/colorPrimaryTextColor</item>
+        <item name="android:actionMenuTextColor">@color/colorPrimaryTextColor</item>
+        <item name="android:background">@color/md_white_1000</item>3
+    </style>
+
+    <style name="actionBarTitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/md_white_1000</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>

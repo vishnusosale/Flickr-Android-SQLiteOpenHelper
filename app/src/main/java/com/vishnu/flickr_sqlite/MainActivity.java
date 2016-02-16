@@ -1,10 +1,13 @@
 package com.vishnu.flickr_sqlite;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,23 +31,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (findViewById(R.id.picture_detail_frame_layout) != null)
-        {
+        if (findViewById(R.id.picture_detail_frame_layout) != null) {
             mTwoPane = true;
-            if (savedInstanceState == null)
-            {
+            if (savedInstanceState == null) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.picture_detail_frame_layout, new PictureDetailFragment())
                         .commit();
             }
-        }
-        else
-        {
+        } else {
             mTwoPane = false;
         }
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-
         setSupportActionBar(toolbar);
         run();
 
@@ -107,4 +105,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int menuId = item.getItemId();
+
+        if (menuId == R.id.update_items_menu) {
+            run();
+            return true;
+        } else if (menuId == R.id.delete_items_menu) {
+
+            ContentResolver contentResolver = getContentResolver();
+            contentResolver.delete(FlickrContract.PictureEntry.CONTENT_URI, null, null);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
