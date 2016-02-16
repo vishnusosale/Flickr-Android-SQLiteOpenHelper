@@ -44,8 +44,32 @@ public class MainActivity extends AppCompatActivity {
         }
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        run();
+        // run();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int menuId = item.getItemId();
+
+        if (menuId == R.id.update_items_menu) {
+            run();
+            return true;
+        } else if (menuId == R.id.delete_items_menu) {
+
+            ContentResolver contentResolver = getContentResolver();
+            contentResolver.delete(FlickrContract.PictureEntry.CONTENT_URI, null, null);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void run() {
@@ -102,30 +126,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
         requestQueue.add(jsonObjectRequest);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int menuId = item.getItemId();
-
-        if (menuId == R.id.update_items_menu) {
-            run();
-            return true;
-        } else if (menuId == R.id.delete_items_menu) {
-
-            ContentResolver contentResolver = getContentResolver();
-            contentResolver.delete(FlickrContract.PictureEntry.CONTENT_URI, null, null);
-
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * Created by vishnu on 15/2/16.
@@ -23,6 +24,7 @@ public class PictureListFragment extends Fragment implements
     private final static int PICTURE_LOADER_ID = 0;
     private final String TAG = getClass().getSimpleName();
     ListView listView;
+    TextView emptyView;
     PictureCursorAdapter pictureCursorAdapter;
 
 
@@ -32,6 +34,9 @@ public class PictureListFragment extends Fragment implements
 
         getActivity().getSupportLoaderManager().initLoader(PICTURE_LOADER_ID, null, this);
         listView = (ListView) rootView.findViewById(R.id.list_view);
+        emptyView = (TextView) rootView.findViewById(R.id.empty_view);
+
+        listView.setEmptyView(emptyView);
 
         pictureCursorAdapter = new PictureCursorAdapter(getActivity().getApplicationContext(), null, 0);
         listView.setAdapter(pictureCursorAdapter);
@@ -50,6 +55,7 @@ public class PictureListFragment extends Fragment implements
 
             }
         });
+
 
         return rootView;
     }
