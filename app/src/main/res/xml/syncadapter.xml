@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sync-adapter
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accountType="vishnu.flickr.com"
+    android:allowParallelSyncs="false"
+    android:contentAuthority="com.vishnu.flickr_sqlite"
+    android:isAlwaysSyncable="true"
+    android:supportsUploading="false"
+    android:userVisible="true"
+    />

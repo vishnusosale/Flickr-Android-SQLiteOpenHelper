@@ -15,6 +15,7 @@ public class PictureProvider extends ContentProvider {
 
 
     static final int PICTURE = 100;
+    static final int PICTURE_WITH_ID = 101;
     FlickrDbHelper flickrDbHelper;
     UriMatcher uriMatcher = buildUriMatcher();
 
@@ -22,6 +23,7 @@ public class PictureProvider extends ContentProvider {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = FlickrContract.CONTENT_AUTHORITY;
         matcher.addURI(authority, FlickrContract.PATH_PICTURE, PICTURE);
+        matcher.addURI(authority, FlickrContract.PATH_PICTURE + "/*", PICTURE_WITH_ID);
 
         return matcher;
 
@@ -43,7 +45,6 @@ public class PictureProvider extends ContentProvider {
         // and query the database accordingly.
         final int match = uriMatcher.match(uri);
 
-
         if (match == PICTURE) {
             cursor = flickrDbHelper
                     .getReadableDatabase()
@@ -54,7 +55,7 @@ public class PictureProvider extends ContentProvider {
                             null,
                             null,
                             sortOrder);
-        } else if (uri.toString().contains(FlickrContract.PATH_PICTURE)) {
+        } else if (match == PICTURE_WITH_ID) {
             cursor = flickrDbHelper
                     .getReadableDatabase()
                     .query(FlickrContract.PictureEntry.TABLE_NAME,
@@ -97,6 +98,8 @@ public class PictureProvider extends ContentProvider {
         switch (match) {
             case PICTURE:
                 return FlickrContract.PictureEntry.CONTENT_TYPE;
+            case PICTURE_WITH_ID:
+                return FlickrContract.PictureEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

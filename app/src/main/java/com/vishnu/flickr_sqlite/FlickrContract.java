@@ -60,7 +60,7 @@ public class FlickrContract {
                 PictureEntry.COL_TITLE, PictureEntry.COL_LINK, PictureEntry.COL_IMAGE,
                 PictureEntry.COL_AUTHOR, PictureEntry.COL_AUTHOR_ID, PictureEntry.COL_PUBLISHED_DATE};
 
-        /*
+        /**
             These are indices tied to PICTURE_COLUMNS. If PICTURE_COLUMNS change, these must change!
          */
         public static final int COL_PICTURE_ID = 0;
