@@ -23,16 +23,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".PictureDetailActivity">
+        </activity>
+
         <provider
             android:name=".PictureProvider"
             android:authorities="com.vishnu.flickr_sqlite"
             android:exported="false"
             android:syncable="true"/>
 
-        <activity android:name=".PictureDetailActivity">
-        </activity>
-
-        <service android:name=".sync.SyncService">
+        <!-- SyncAdapter's dummy authentication service -->
+        <service android:name=".sync.PictureAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
             </intent-filter>
@@ -41,6 +42,16 @@
                 android:resource="@xml/authenticator"/>
         </service>
 
+        <!-- The SyncAdapter service -->
+        <service android:name=".sync.PictureSyncService"
+                 android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
+        </service>
     </application>
 
 </manifest>

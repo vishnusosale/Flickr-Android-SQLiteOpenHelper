@@ -16,8 +16,9 @@
         <item name="android:textColor">@color/colorPrimaryTextColor</item>
     </style>
 
-    <style name="FlickToolBarTheme" parent="Widget.AppCompat.Toolbar">
+    <style name="FlickToolBarTheme" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/colorPrimary</item>
+
     </style>
 
     <style name="actionBarPopOverLay">
